@@ -4,7 +4,7 @@ Created on 21 lut 2016
 @author: luk
 '''
 
-class Notifier(object):
+class DataReceiver():
     '''
     classdocs
     '''
@@ -14,7 +14,8 @@ class Notifier(object):
         '''
         Constructor
         '''
+        self.n = 1
         
-        
-    def notify(self, diff):
-        print(diff)
+    def receive(self):
+        self.n += 1
+        return self.n

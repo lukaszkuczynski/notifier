@@ -4,7 +4,7 @@ Created on 21 lut 2016
 @author: luk
 '''
 
-class StateManager(object):
+class StatefulManager():
     '''
     classdocs
     '''
@@ -21,3 +21,4 @@ class StateManager(object):
     
     def save(self, state):
         self.state = state
+        
