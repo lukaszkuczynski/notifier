@@ -4,7 +4,7 @@ Created on 21 lut 2016
 @author: luk
 '''
 
-from application.input.datareceiver import DataReceiver
+from input.datareceiver import DataReceiver
 import requests
 
 class UrlContentReceiver(DataReceiver):
@@ -22,7 +22,7 @@ class UrlContentReceiver(DataReceiver):
         
     def receive(self):
         r = requests.get(self.url)
-        return r.content
+        return str(r.content)
         
         
 if __name__ == '__main__' :

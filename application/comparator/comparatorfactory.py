@@ -3,8 +3,8 @@ Created on 21 lut 2016
 
 @author: luk
 '''
-from application.comparator.mathcomparators import MathDiffComparator, MathLenComparator
-from application.comparator.textcomparators import TextComparator
+from comparator.mathcomparators import MathDiffComparator, MathLenComparator
+from comparator.textcomparators import TextComparator
 
 class ComparatorFactory(object):
     '''
