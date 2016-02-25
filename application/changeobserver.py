@@ -67,7 +67,7 @@ if __name__ == '__main__' :
             }                        
         }
     
-    params = json.load(open('config.json', 'r'))
+#    params = json.load(open('config.json', 'r'))
     observer = ChangeObserver(params)
     observer.notify_if_changed()
         

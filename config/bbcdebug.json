@@ -1,0 +1,19 @@
+{
+	"input" : {
+		"type" : "web.element",
+		"url" : "http://www.bbc.com/news",
+		"xpath" : "//*[@id='comp-top-story-1']/div/div/a[1]/h3/span/text()"
+	},
+	"stateManager" : {
+		"type" : "file",
+		"filename" : "state.txt"
+	},
+	"comparator" : {
+		"type" : "text"
+	},
+	"notifier" : {
+		"type" : "file",
+		"filename" : "changes.txt"
+	}
+
+}
