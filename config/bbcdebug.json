@@ -13,7 +13,7 @@
 	},
 	"notifier" : {
 		"type" : "file",
-		"filename" : "changes.txt"
+		"filename" : "/home/gihon/public_html/changes.txt"
 	}
 
 }
