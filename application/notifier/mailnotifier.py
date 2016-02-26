@@ -24,36 +24,41 @@ class MailNotifier():
 
     def __init__(self, params=None):
         logger.debug('init notifier, params %s', params)
-        self.server = params['notifier']['server']
+        self.recipients = params['notifier']['recipients']
+
         
     def notify(self, diff):
-        msg = MIMEText('tekst')
+        diffdump = json.dumps(diff)
+        msg = MIMEText('sie pozmienialo ' + diffdump)
         
         config = json.load(open('config.json', 'r'))
         mail_config = config['mail'] 
-        
         # me == the sender's email address
         # you == the recipient's email address
         msg['Subject'] = mail_config['subject']
         me = mail_config['from']
-        you = mail_config['to']
         msg['From'] = me
-        msg['To'] = you
-        # Send the message via our own SMTP server, but don't include the
-        # envelope header.
         s = smtplib.SMTP(mail_config['server']['name'])
         user = mail_config['server']['user']
         password = mail_config['server']['password']
         s.login(user, password)
-        s.sendmail(me, [you], msg.as_string())
+        
+        msg['To'] = ",".join(self.recipients)        
+        s.sendmail(me, self.recipients, msg.as_string())
+#         for recipient in self.recipients :
+#             msg['To'] = recipient        
+#             s.sendmail(me, [recipient], msg.as_string())
         s.quit()        
-        pass
         
 
 if __name__ == '__main__' :
+    recipients_str = open('default_recipients.txt','r').read()
+    
+    recipients = recipients_str.split(',')
+    
     params = {
               'notifier' : {
-                'server' : 1
+                'recipients' : recipients 
             }
     }
     n = MailNotifier(params)
