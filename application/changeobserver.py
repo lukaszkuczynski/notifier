@@ -57,7 +57,7 @@ if __name__ == '__main__' :
 #             },
             'stateManager' : {
                 'type' : 'file',
-                'filename' : 'aa.json'
+                'filename' : '../output/aa.json'
             },
             'comparator' : {
                 'type' : 'text'
