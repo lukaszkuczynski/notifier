@@ -47,7 +47,7 @@ if __name__ == '__main__' :
         print ('running with config from', config_file)        
         params = json.load(open(config_file, 'r'))
     else :    
-        from application.config import config
+        from config import config
         recipients = config.config()['mail']['default_recipients']
         params = {
             'input' : {
@@ -62,7 +62,7 @@ if __name__ == '__main__' :
                 'type' : 'text'
             },
             'notifier' : {
-                'type' : 'debug',
+                'type' : 'mail',
                 'recipients' : recipients
             }                        
         }

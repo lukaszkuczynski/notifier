@@ -39,11 +39,14 @@ class MailNotifier():
         msg['Subject'] = mail_config['subject']
         me = mail_config['from']
         msg['From'] = me
-        s = smtplib.SMTP(mail_config['server']['name'])
+        s = smtplib.SMTP(mail_config['server']['name'])        
         user = mail_config['server']['user']
         password = mail_config['server']['password']
-        s.login(user, password)
-        
+        if not user and not password :
+            logger.debug('no log in')
+        else :
+            logger.debug('logging in to smtp')
+            s.login(user, password)        
         msg['To'] = ",".join(self.recipients)        
         s.sendmail(me, self.recipients, msg.as_string())
 #         for recipient in self.recipients :
