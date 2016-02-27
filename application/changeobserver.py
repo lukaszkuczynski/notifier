@@ -47,14 +47,13 @@ if __name__ == '__main__' :
         print ('running with config from', config_file)        
         params = json.load(open(config_file, 'r'))
     else :    
+        from application.config import config
+        recipients = config.config()['mail']['default_recipients']
         params = {
             'input' : {
                 'type' : 'url.content',
-                'url' :'http://www.timeapi.org/pdt/this+friday+at+noon'
+                "url" : "http://www.timeapi.org/utc/now?format=%25a%20%25b%20%25d%20%25I:%25M"
             },
-#             'stateManager' : {
-#                 'type' : 'stateful',
-#             },
             'stateManager' : {
                 'type' : 'file',
                 'filename' : '../output/aa.json'
@@ -63,7 +62,8 @@ if __name__ == '__main__' :
                 'type' : 'text'
             },
             'notifier' : {
-                'type' : 'debug'
+                'type' : 'mail',
+                'recipients' : recipients
             }                        
         }
     

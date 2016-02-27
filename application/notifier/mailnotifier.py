@@ -9,6 +9,7 @@ from datetime import datetime
 import logging
 import smtplib
 from email.mime.text import MIMEText
+from application.config import config
 
 
 FORMAT = '%(asctime)-24s %(levelname)-8s %(message)s'
@@ -31,8 +32,8 @@ class MailNotifier():
         diffdump = json.dumps(diff)
         msg = MIMEText('sie pozmienialo ' + diffdump)
         
-        config = json.load(open('config.json', 'r'))
-        mail_config = config['mail'] 
+        env_config = config.config()
+        mail_config = env_config['mail'] 
         # me == the sender's email address
         # you == the recipient's email address
         msg['Subject'] = mail_config['subject']
@@ -52,10 +53,8 @@ class MailNotifier():
         
 
 if __name__ == '__main__' :
-    recipients_str = open('default_recipients.txt','r').read()
-    
-    recipients = recipients_str.split(',')
-    
+    recipients = config.config()['mail']['default_recipients'] 
+        
     params = {
               'notifier' : {
                 'recipients' : recipients 

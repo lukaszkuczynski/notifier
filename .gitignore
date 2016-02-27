@@ -3,5 +3,3 @@
 *.zip
 config/
 output/
-config.json
-default_recipients.txt
