@@ -62,7 +62,7 @@ if __name__ == '__main__' :
                 'type' : 'text'
             },
             'notifier' : {
-                'type' : 'mail',
+                'type' : 'debug',
                 'recipients' : recipients
             }                        
         }

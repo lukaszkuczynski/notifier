@@ -21,8 +21,9 @@ class FileStateManager():
     def read(self):
         if not os.path.isfile(self.filename) :
             d = os.path.dirname(self.filename)
-            if not os.path.exists(d):
-                os.makedirs(d)
+            if len(d) > 0 :
+                if not os.path.exists(d):
+                    os.makedirs(d)
             open(self.filename, 'w+')            
         f = open(self.filename, 'r')
         raw = f.read()
