@@ -9,7 +9,7 @@ from datetime import datetime
 import logging
 import smtplib
 from email.mime.text import MIMEText
-from application.config import config
+from config import config
 
 
 FORMAT = '%(asctime)-24s %(levelname)-8s %(message)s'
