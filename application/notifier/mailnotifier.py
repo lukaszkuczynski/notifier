@@ -39,7 +39,7 @@ class MailNotifier():
         msg['Subject'] = mail_config['subject']
         me = mail_config['from']
         msg['From'] = me
-        s = smtplib.SMTP(mail_config['server']['name'])        
+        s = smtplib.SMTP_SSL(mail_config['server']['name'])
         user = mail_config['server']['user']
         password = mail_config['server']['password']
         if not user and not password :
