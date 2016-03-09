@@ -40,10 +40,6 @@ class WebArticlesReceiver:
             a = Article(title=title, text=content)
             print(a)
             articles.append(a)
-
-
-
-        # return articles
         return articles
 
 
