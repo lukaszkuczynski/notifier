@@ -5,6 +5,7 @@ Created on 21 lut 2016
 '''
 from state.statemanager import StatefulManager
 from state.filestatemanager import FileStateManager
+from state.raw_state_manager import RawStateManager
 
 class StateManagerFactory(object):
     '''
@@ -16,4 +17,6 @@ class StateManagerFactory(object):
             if (params['stateManager']['type'] == 'stateful') :
                 return StatefulManager(initialState="")
             if (params['stateManager']['type'] == 'file') :
-                return FileStateManager(params)            
+                return FileStateManager(params)
+            if (params['stateManager']['type'] == 'raw') :
+                return RawStateManager(params)

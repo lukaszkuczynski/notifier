@@ -1,4 +1,5 @@
 import pickle
+import os
 
 class RawStateManager:
 
@@ -7,9 +8,20 @@ class RawStateManager:
             self.filename = params['stateManager']['filename']
 
     def read(self):
-        pass
+        if os.path.isfile(self.filename) :
+            f = open(self.filename, 'rb')
+            return pickle.load(f)
+        else :
+            return None
+
+    def force_file(self, path):
+        d = os.path.dirname(path)
+        if len(d) > 0 :
+            if not os.path.exists(d):
+                os.makedirs(d)
 
     def save(self, state):
-        f = open(self.filename, 'wb')
+        self.force_file(self.filename)
+        f = open(self.filename, 'wb+')
         pickle.dump(state, f)
 

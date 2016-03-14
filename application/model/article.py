@@ -6,7 +6,7 @@ class Article:
         self.text = text
 
     def __str__(self):
-        return self.__dict__.__str__()
+        return "ARTICLE " + self.__dict__.__str__()
 
     def __repr__(self):
         return self.__str__()

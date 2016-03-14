@@ -17,7 +17,7 @@ class RawStateManagerTest(unittest.TestCase) :
         print('setup')
         self._sut = RawStateManager(None)
         self._sut.filename = self.FILE_NAME
-        self.removeFilesFromDir(self.FILE_PATH_TEMP)
+        # self.removeFilesFromDir(self.FILE_PATH_TEMP)
         copyfile(self.FILE_PATH_RES, self.FILE_PATH_TEMP)
 
     def removeFilesFromDir(self, dir):

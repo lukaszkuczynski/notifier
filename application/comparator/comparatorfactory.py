@@ -5,6 +5,7 @@ Created on 21 lut 2016
 '''
 from comparator.mathcomparators import MathDiffComparator, MathLenComparator
 from comparator.textcomparators import TextComparator
+from comparator.listcomparator import ListComparator
 
 class ComparatorFactory(object):
     '''
@@ -21,4 +22,6 @@ class ComparatorFactory(object):
         if (params['comparator']['type'] == 'math.difference') :
             return MathDiffComparator()
         if (params['comparator']['type'] == 'text') :
-            return TextComparator()        
+            return TextComparator()
+        if (params['comparator']['type'] == 'list') :
+            return ListComparator()

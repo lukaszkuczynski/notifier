@@ -6,7 +6,7 @@ Created on 21 lut 2016
 
 from lxml import html
 import requests
-from application.model.article import Article
+from model.article import Article
 
 
 class WebArticlesReceiver:

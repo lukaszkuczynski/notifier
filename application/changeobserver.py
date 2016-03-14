@@ -37,6 +37,18 @@ class ChangeObserver(object):
             return diff
         else :
             print('..no change')
+
+    def notify_if_changed_new_diff(self) :
+        current_state = self.dataReceiver.receive()
+        saved_state = self.stateManager.read()
+        diff = self.comparator.compare(previous_state=saved_state, current_state=current_state)
+        self.stateManager.save(current_state)
+        if (diff.changed()) :
+            print('was changed!')
+            self.notifier.notify(diff.all_changes())
+            return diff
+        else :
+            print('..no change')
             
 
 
