@@ -8,7 +8,11 @@ from comparator.comparatorfactory import ComparatorFactory
 from input.inputfactory import InputFactory
 from notifier.notifierfactory import NotifierFactory
 from state.statemanagerfactory import StateManagerFactory
-import time, sys, json
+import time, sys, json, logging
+
+FORMAT = '%(asctime)-24s %(levelname)-8s %(message)s'
+logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+logger = logging.getLogger('ChangeObserver')
 
 class ChangeObserver(object):
     '''
@@ -31,12 +35,22 @@ class ChangeObserver(object):
         saved_state = self.stateManager.read()
         diff = self.comparator.compare(previous_state=saved_state, current_state=current_state)
         self.stateManager.save(current_state)
-        if (diff['changed']) :
-            print('was changed!')
-            self.notifier.notify(diff)
-            return diff
-        else :
-            print('..no change')
+        if type(diff) is dict:
+            logger.debug('diff is type of dict')
+            if (diff['changed']):
+                print('was changed!')
+                self.notifier.notify(diff)
+                return diff
+            else:
+                print('..no change')
+        else:
+            logger.debug('diff is object')
+            if (diff.changed()):
+                print('was changed!')
+                self.notifier.notify(diff.all_changes())
+                return diff
+            else:
+                print('..no change')
 
     def notify_if_changed_new_diff(self) :
         current_state = self.dataReceiver.receive()
