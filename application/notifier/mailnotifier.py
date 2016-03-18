@@ -9,8 +9,10 @@ from datetime import datetime
 import logging
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import email.charset
+from jinja2 import Environment, FileSystemLoader
 from config import config
-
 
 FORMAT = '%(asctime)-24s %(levelname)-8s %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
@@ -25,20 +27,19 @@ class MailNotifier():
 
     def __init__(self, params=None):
         logger.debug('init notifier, params %s', params)
-        self.recipients = params['notifier']['recipients']
+        if params != None and 'notifier' in params.keys() :
+            self.recipients = params['notifier']['recipients']
+            self.template = params['notifier']['template']
+        else:
+            logger.warn('params seems to be empty')
 
         
     def notify(self, diff):
-        diffdump = json.dumps(diff)
-        msg = MIMEText('sie pozmienialo ' + diffdump)
-        
         env_config = config.config()
-        mail_config = env_config['mail'] 
-        # me == the sender's email address
-        # you == the recipient's email address
-        msg['Subject'] = mail_config['subject']
-        me = mail_config['from']
-        msg['From'] = me
+        mail_config = env_config['mail']
+
+        msg = self.build_msg_html(diff, mail_config, template_filename=self.template)
+
         s = smtplib.SMTP_SSL(mail_config['server']['name'])
         user = mail_config['server']['user']
         password = mail_config['server']['password']
@@ -47,23 +48,41 @@ class MailNotifier():
         else :
             logger.debug('logging in to smtp')
             s.login(user, password)        
-        msg['To'] = ",".join(self.recipients)        
-        s.sendmail(me, self.recipients, msg.as_string())
-#         for recipient in self.recipients :
-#             msg['To'] = recipient        
-#             s.sendmail(me, [recipient], msg.as_string())
-        s.quit()        
-        
+        s.sendmail(msg['From'], self.recipients, msg.as_string())
+        s.quit()
 
-if __name__ == '__main__' :
-    recipients = config.config()['mail']['default_recipients'] 
-        
-    params = {
-              'notifier' : {
-                'recipients' : recipients 
-            }
-    }
-    n = MailNotifier(params)
-    diff = 'diff'
-    n.notify(diff)
-    
+    def build_msg_raw(self, diff, mail_config):
+        diffdump = str(diff)
+        msg = MIMEText('sie pozmienialo ' + diffdump)
+        msg['Subject'] = mail_config['subject']
+        msg['From'] = mail_config['from']
+        msg['To'] = ",".join(self.recipients)
+        return msg
+
+    def build_msg_html(self, diff, mail_config, template_filename):
+
+        msg = MIMEMultipart("alternative")
+        # msg['Subject'] = 'foo'
+        # msg['From'] = 'sender@test.com'
+        # msg['To'] = 'recipient@test.com'
+        # msg.set_payload('Body of <b>messagłłe</b>')
+        #
+        # msg = MIMEMultipart('alternative')
+
+        msg['Subject'] = mail_config['subject']
+        msg['From'] = mail_config['from']
+        msg['To'] = ",".join(self.recipients)
+
+        template_folder = os.path.dirname(template_filename)
+        template_file = os.path.basename(template_filename)
+
+        env = Environment(loader=FileSystemLoader(template_folder))
+        template = env.get_template(template_file)
+        rendered_html = template.render(diff=diff.all_changes())
+        part_html = MIMEText(rendered_html, "html", "utf-8")
+
+        msg.attach(part_html)
+
+        return msg
+
+

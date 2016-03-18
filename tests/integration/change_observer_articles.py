@@ -2,6 +2,7 @@ import unittest
 from application.changeobserver import ChangeObserver
 from config import config
 
+
 class ChangeObserverArticlesTest(unittest.TestCase):
 
     def test_get_articles(self):

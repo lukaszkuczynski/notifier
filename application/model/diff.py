@@ -13,3 +13,6 @@ class Diff:
 
     def all_changes(self):
         return self.value
+
+    def __str__(self):
+        return self.all_changes().__str__()

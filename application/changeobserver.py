@@ -47,7 +47,7 @@ class ChangeObserver(object):
             logger.debug('diff is object')
             if (diff.changed()):
                 print('was changed!')
-                self.notifier.notify(diff.all_changes())
+                self.notifier.notify(diff)
                 return diff
             else:
                 print('..no change')
