@@ -29,11 +29,11 @@ class ListComparatorTestCase(unittest.TestCase):
 
     def test_diff_has_list_with_order(self):
         sut = ListComparator()
-        prev = range(1,9)
-        curr = range(1,11)
+        prev = range(1,50)
+        curr = range(1,100)
         diff = sut.compare(prev, curr)
         self.assert_diff_has_elements(diff)
-        self.assertListEqual(diff.value, [9,10])
+        self.assertListEqual(diff.value, list(range(50,100)))
 
     def getArticles(self, count):
         articles = []

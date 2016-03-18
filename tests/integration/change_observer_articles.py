@@ -12,7 +12,7 @@ class ChangeObserverArticlesTest(unittest.TestCase):
                 'type': 'web.articles',
                 'url': 'http://wiadomosci.wp.pl/?ticaid=1169c4&_ticrsn=3',
                 'article': {
-                    'path':'ul.wiadomosciLst li',
+                    'path':'div#bxWiadPolska ul.wiadomosciLst li',
                 },
                 'articleElement': {
                     'titles': ['h2 a', 'a'],

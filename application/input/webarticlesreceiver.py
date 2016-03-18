@@ -38,7 +38,6 @@ class WebArticlesReceiver:
             title = self.parse_from_element_using_css(article_node, self.titles)
             content = self.parse_from_element_using_css(article_node, self.contents)
             a = Article(title=title, text=content)
-            print(a)
             articles.append(a)
         return articles
 
@@ -46,7 +45,7 @@ class WebArticlesReceiver:
 if __name__ == '__main__':
     
     url = 'http://wiadomosci.wp.pl/?ticaid=1169c4&_ticrsn=3'
-    article = 'ul.wiadomosciLst li'
+    article = 'div#bxWiadPolska ul.wiadomosciLst li'
     titles = ['h2 a', 'a']
     contents = titles
     link = ''
@@ -66,4 +65,6 @@ if __name__ == '__main__':
     };
 
     w = WebArticlesReceiver(params)
-    print(w.receive())
+    arts = w.receive()
+    print('received %d elements'%(len(arts)))
+    print(arts)
