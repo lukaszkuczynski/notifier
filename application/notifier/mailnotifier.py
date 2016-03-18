@@ -51,24 +51,10 @@ class MailNotifier():
         s.sendmail(msg['From'], self.recipients, msg.as_string())
         s.quit()
 
-    def build_msg_raw(self, diff, mail_config):
-        diffdump = str(diff)
-        msg = MIMEText('sie pozmienialo ' + diffdump)
-        msg['Subject'] = mail_config['subject']
-        msg['From'] = mail_config['from']
-        msg['To'] = ",".join(self.recipients)
-        return msg
 
     def build_msg_html(self, diff, mail_config, template_filename):
 
         msg = MIMEMultipart("alternative")
-        # msg['Subject'] = 'foo'
-        # msg['From'] = 'sender@test.com'
-        # msg['To'] = 'recipient@test.com'
-        # msg.set_payload('Body of <b>messagłłe</b>')
-        #
-        # msg = MIMEMultipart('alternative')
-
         msg['Subject'] = mail_config['subject']
         msg['From'] = mail_config['from']
         msg['To'] = ",".join(self.recipients)
