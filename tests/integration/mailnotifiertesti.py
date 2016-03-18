@@ -1,5 +1,8 @@
+#!/usr/bin/python
+#  -*- coding: utf-8 -*-
+
 from unittest import TestCase
-from config import config
+from application.config import config
 from application.notifier.mailnotifier import MailNotifier
 from tests.integration.test_utils.test_objects_provider import TestProvider
 
