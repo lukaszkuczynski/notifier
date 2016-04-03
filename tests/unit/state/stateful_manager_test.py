@@ -7,7 +7,7 @@ import unittest
 from application.state.statemanager import StatefulManager
 
 
-class Test(unittest.TestCase):
+class StatefulManagerTest(unittest.TestCase):
 
 
     def test_hasInitial_afterInit(self):

@@ -4,7 +4,7 @@
 from unittest import TestCase
 from application.config import config
 from application.notifier.mailnotifier import MailNotifier
-from tests.integration.test_utils.test_objects_provider import TestProvider
+from tests.integration_test.test_utils.test_objects_provider import TestProvider
 
 
 class MailNotifierTestI(TestCase):

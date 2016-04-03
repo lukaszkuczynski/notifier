@@ -78,7 +78,7 @@ if __name__ == '__main__' :
         params = {
             'input' : {
                 'type' : 'url.content',
-                "url" : "http://www.timeapi.org/utc/now?format=%25a%20%25b%20%25d%20%25I:%25M"
+                "url" : "http://www.timeapi.org/utc/now?format=%25a%20%25b%20%25d%20%25I:%25M:%25S"
             },
             'stateManager' : {
                 'type' : 'file',
@@ -88,7 +88,7 @@ if __name__ == '__main__' :
                 'type' : 'text'
             },
             'notifier' : {
-                'type' : 'mail',
+                'type' : 'debug',
                 'recipients' : recipients
             }                        
         }

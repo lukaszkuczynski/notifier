@@ -4,6 +4,8 @@ Created on 21 lut 2016
 @author: luk
 '''
 
+
+
 class TextComparator():
     '''
     classdocs

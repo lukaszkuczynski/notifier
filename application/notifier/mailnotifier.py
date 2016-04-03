@@ -13,7 +13,6 @@ from email.mime.multipart import MIMEMultipart
 import email.charset
 from jinja2 import Environment, FileSystemLoader
 from config import config
-
 FORMAT = '%(asctime)-24s %(levelname)-8s %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 logger = logging.getLogger('MailNotifier')

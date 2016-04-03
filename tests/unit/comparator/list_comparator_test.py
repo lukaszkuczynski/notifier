@@ -4,7 +4,7 @@ from application.comparator.listcomparator import ListComparator
 from application.model.article import Article
 
 
-class ListComparatorTestCase(unittest.TestCase):
+class ListComparatorTest(unittest.TestCase):
 
     def assert_diff_empty_list(self, diff):
         self.assertTrue(diff.value == [])

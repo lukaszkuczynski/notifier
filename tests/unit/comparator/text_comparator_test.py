@@ -7,7 +7,7 @@ import unittest
 from application.comparator.textcomparators import TextComparator
 
 
-class Test(unittest.TestCase):
+class TextComparatorTest(unittest.TestCase):
 
 #     sut = TextComparator()
 
