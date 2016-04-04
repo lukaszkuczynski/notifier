@@ -1,32 +1,40 @@
-from input.webarticlesreceiver import WebArticlesReceiver
-from unittest import TestCase, skip
+from input.web_element_receiver import WebElementReceiver
+from unittest import TestCase
 
 
-class WebArticlesReceiverTestI(TestCase):
+class WebElementReceiverTestI(TestCase):
 
-    @skip
     def test(self):
-        url = "http://wiadomosci.wp.pl/?ticaid=1169c4&_ticrsn=3"
-        article = "div#bxWiadPolska ul.wiadomosciLst li"
-        titles = ["h2 a", "a"]
-        contents = titles
-        link = ""
+        # url = "http://wiadomosci.wp.pl/?ticaid=1169c4&_ticrsn=3"
+        # params = {
+        #     "input": {
+        #         "url": url,
+        #         "element": {
+        #             "parentPath":"div#bxWiadPolska ul.wiadomosciLst li",
+        #             "keys": {
+        #                 "title": ["h2 a", "a"],
+        #                 "content": ["h2 a", "a"],
+        #             }
+        #         }
+        #     }
+        # };
+        url = "http://www.domiporta.pl/sprzedam-dzialke-dolnoslaskie_sroda_slaska"
+        # url = "http://wiadomosci.wp.pl/?ticaid=1169c4&_ticrsn=3"
         params = {
             "input": {
-                "type": "web.element",
                 "url": url,
-                "article": {
-                    "path":article,
-                },
-                "articleElement": {
-                    "titles":titles,
-                    "contents":contents,
-                    "link":link,
+                "element": {
+                    "parentPath":"div.WynikiLista div.NoweWyniki",
+                    "keys": {
+                        "title": ["div.Tytul a.TytulOgloszenia"],
+                        "price": ["span.CenaTekst"],
+                    }
                 }
             }
         };
 
-        w = WebArticlesReceiver(params)
-        arts = w.receive()
-        print("received %d elements"%(len(arts)))
-        print(arts)
+
+        w = WebElementReceiver(params)
+        elements = w.receive()
+        print("received %d elements"%(len(elements)))
+        for e in elements: print(e)

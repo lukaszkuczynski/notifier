@@ -1,24 +1,20 @@
 import unittest
 from application.changeobserver import ChangeObserver
-from config import config
 
 
 class ChangeObserverArticlesTest(unittest.TestCase):
 
     def test_get_articles(self):
-
-        recipients = config.config()['mail']['default_recipients']
         params = {
             'input': {
                 'type': 'web.articles',
                 'url': 'http://wiadomosci.wp.pl/?ticaid=1169c4&_ticrsn=3',
-                'article': {
-                    'path':'div#bxWiadPolska ul.wiadomosciLst li',
-                },
-                'articleElement': {
-                    'titles': ['h2 a', 'a'],
-                    'contents': ['h2 a', 'a'],
-                    'link':['']
+                'element': {
+                    'parentPath':'div#bxWiadPolska ul.wiadomosciLst li',
+                    'keys': {
+                        'title': ['h2 a', 'a'],
+                        'content': ['h2 a', 'a'],
+                    }
                 }
             },
             'stateManager' : {

@@ -27,6 +27,6 @@ class ListComparatorTestCase(unittest.TestCase):
         art2 = Article('titł')
         diff = Diff([art,art2])
         # template = '<body>hello</body>'
-        template = 'd://temp//articles.html'
-        msg = sut.build_msg_html(diff.all_changes(), mail_config, template)
+        template = 'd://prj//notifier//mail_templates//articles.html'
+        msg = sut.build_msg_html(diff, mail_config, template)
         print(msg)

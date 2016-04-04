@@ -1,0 +1,20 @@
+<html>
+<meta charset=utf-8>
+
+<body>
+oto oferty
+{% block body %}
+  <ul>
+  {% for offer in diff %}
+    <li><a href="{{ offer.link }}">{{ offer.link }}</a> 
+	<h4>{{offer.title}}</h4>
+	cena <pre>{{offer.text}}</pre>
+	
+	
+	</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+</body>
+
+</html>

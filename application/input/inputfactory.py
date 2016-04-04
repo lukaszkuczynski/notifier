@@ -4,8 +4,7 @@ Created on 21 lut 2016
 @author: luk
 '''
 from input.urlcontentreceiver import UrlContentReceiver
-from input.webelementreceiver import WebElementReceiver
-from input.webarticlesreceiver import WebArticlesReceiver
+from input.web_element_receiver import WebElementReceiver
 
 class InputFactory(object):
     '''
@@ -18,6 +17,4 @@ class InputFactory(object):
             return UrlContentReceiver(params)
         if (params['input']['type'] == 'web.element') :
             return WebElementReceiver(params)
-        if (params['input']['type'] == 'web.articles') :
-            return WebArticlesReceiver(params)
         
