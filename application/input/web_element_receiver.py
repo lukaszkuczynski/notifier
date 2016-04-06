@@ -7,6 +7,11 @@ Created on 21 lut 2016
 from lxml import html
 import requests
 from model.element import Element
+import logging
+
+FORMAT = '%(asctime)-24s %(levelname)-8s %(message)s'
+logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+logger = logging.getLogger('WebElementReceiver')
 
 
 class WebElementReceiver:
@@ -25,7 +30,9 @@ class WebElementReceiver:
             title_candidate = element.cssselect(select)
             if len(title_candidate) == 1 :
                 if title_candidate[0].text:
-                    return title_candidate[0].text
+                    text = title_candidate[0].text
+                    logger.debug("found %s in element with path '%s'", text, select)
+                    return text
         return ''
 
     def receive(self):

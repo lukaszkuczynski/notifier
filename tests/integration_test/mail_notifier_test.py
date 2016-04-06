@@ -16,7 +16,7 @@ class MailNotifierTestI(TestCase):
         params = {
                   'notifier' : {
                     'recipients' : recipients,
-                    'template' : 'd://temp//articles.html'
+                    'template' : "d://prj//notifier//mail_templates//articles.html"
                 }
         }
         n = MailNotifier(params)
